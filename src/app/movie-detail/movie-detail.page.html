@@ -7,18 +7,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding"
-  style="--background: linear-gradient(rgba(0,0,0, 0.1) 0%, rgba(0,0,0, 1) 100%), url('https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg') no-repeat top center / cover;">
+  style="--background: linear-gradient(rgba(0,0,0, 0.1) 0%, rgba(0,0,0, 1) 100%), url('{{pelicula.imagen}}') no-repeat top center / cover;">
   <div class="content-detail">
     <div class="detail-movie-box ion-padding">
-      <h1>Spiderman</h1>
-      <p>Superheroes, Ficción</p>
+      <h1>{{pelicula.nombre}}</h1>
+      <p>{{pelicula.genero}}</p>
       <div class="grid-movie-data">
-        <span><ion-icon name="star" class="icon-star"></ion-icon>4.8</span>
-        <span>2002</span>
-        <span>120 min</span>
+        <span><ion-icon name="star" class="icon-star"></ion-icon>{{pelicula.calificacion}}</span>
+        <span>{{pelicula.year}}</span>
+        <span>{{pelicula.duracion}} min</span>
       </div>
-      <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod architecto commodi nobis veritatis magnam saepe,
-        hic, culpa vero modi animi est sequi minus ipsam similique et ex, mollitia aut itaque.</p>
+      <p class="description">{{pelicula.descripcion}}</p>
       <ion-button expand="full" fill="outline" shape="round" color="light">Ver trailer</ion-button>
     </div>
   </div>
