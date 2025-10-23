@@ -1,0 +1,43 @@
+.content-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: 65%;
+}
+
+.detail-movie-box {
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+    margin-bottom: 3rem;
+    .description {
+        margin-bottom: 2rem;
+    }
+}
+
+.grid-movie-data {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.75rem;
+    margin-bottom: 2rem;
+    .icon-star {
+        margin-right: 5px;
+        color: #cdff67;
+    }
+}
+
+
+ion-img {
+    height: 15rem;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}

@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
-import { IonContent } from '@ionic/angular/standalone';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { star } from 'ionicons/icons';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 register();
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-  imports: [IonContent, RouterModule],
+  selector: 'app-movie-detail',
+  templateUrl: './movie-detail.page.html',
+  styleUrls: ['./movie-detail.page.scss'],
+  standalone: true,
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonBackButton, IonButtons, IonButton, IonIcon],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomePage {
+export class MovieDetailPage implements OnInit {
   peliculas: any = [
     {
       "id": 1,
@@ -71,7 +74,11 @@ export class HomePage {
     },
   ]
 
-  constructor() { }
+  constructor() {
+    addIcons({ star });
+  }
 
+  ngOnInit() {
+  }
 
 }

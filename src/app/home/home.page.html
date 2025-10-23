@@ -1,20 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="section-home">
+    <h2>Estrenos</h2>
+    <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+      @for (pelicula of peliculas; track pelicula.id) {
+      <swiper-slide>
+        <ion-img [routerLink]="['/movie-detail', pelicula.id]" src="{{pelicula.imagen}}"></ion-img>
+      </swiper-slide>
+      }
+    </swiper-container>
+  </div>
+  <div class="section-home">
+    <h2>Cartelera</h2>
+    <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+      @for (pelicula of peliculas; track pelicula.id) {
+      <swiper-slide>
+        <ion-img [routerLink]="['/movie-detail', pelicula.id]" src="{{pelicula.imagen}}"></ion-img>
+      </swiper-slide>
+      }
+    </swiper-container>
+  </div>
+  <div class="section-home">
+    <h2>Populares</h2>
+    <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+      @for (pelicula of peliculas; track pelicula.id) {
+      <swiper-slide>
+        <ion-img [routerLink]="['/movie-detail', pelicula.id]" src="{{pelicula.imagen}}"></ion-img>
+      </swiper-slide>
+      }
+    </swiper-container>
   </div>
 </ion-content>
+

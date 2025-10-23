@@ -35,3 +35,45 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+h1 {
+    font-size: 1.4rem;
+}
+h2 {
+    font-size: 1.250rem;
+}
+h3 {
+    font-size: 1.125rem;
+}
+
+h1, h2, h3, p {
+    margin-top: 0;
+}
+
+p {
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+ion-content {
+    --background: #000000;
+    --color: #FFF;
+    font-family: "Oswald", sans-serif;
+}
+ion-tabs {
+    ion-tab-bar {
+        --background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+    }
+    ion-tab-button {
+        --color-selected: #cdff67;
+        --color-focused: #cdff67;
+    }
+}
+
+ion-header {
+    ion-toolbar {
+        --background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+    }
+}

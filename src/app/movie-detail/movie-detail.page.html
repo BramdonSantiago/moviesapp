@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding"
+  style="--background: linear-gradient(rgba(0,0,0, 0.1) 0%, rgba(0,0,0, 1) 100%), url('https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg') no-repeat top center / cover;">
+  <div class="content-detail">
+    <div class="detail-movie-box ion-padding">
+      <h1>Spiderman</h1>
+      <p>Superheroes, Ficción</p>
+      <div class="grid-movie-data">
+        <span><ion-icon name="star" class="icon-star"></ion-icon>4.8</span>
+        <span>2002</span>
+        <span>120 min</span>
+      </div>
+      <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod architecto commodi nobis veritatis magnam saepe,
+        hic, culpa vero modi animi est sequi minus ipsam similique et ex, mollitia aut itaque.</p>
+      <ion-button expand="full" fill="outline" shape="round" color="light">Ver trailer</ion-button>
+    </div>
+  </div>
+  <div class="section-home">
+    <h2>Similares</h2>
+    <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+      @for (pelicula of peliculas; track pelicula.id) {
+      <swiper-slide>
+        <ion-img routerLink="/movie-detail" src="{{pelicula.imagen}}"></ion-img>
+      </swiper-slide>
+      }
+    </swiper-container>
+  </div>
+</ion-content>
