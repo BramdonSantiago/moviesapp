@@ -1,9 +1,61 @@
+ion-header {
+    z-index: 1 !important;
+}
+
+ion-toolbar {
+    margin-top: 2rem;
+    z-index: 1 !important;
+}
+
+
+ion-content {
+    --background: none;
+    position: absolute;
+    top: 0;
+    background-position: top center;
+    background-size: 110% 110%;
+    background-repeat: no-repeat;
+    animation: smoothZoom 60s ease-out infinite;
+    -webkit-animation: smoothZoom 60s ease-out infinite;
+}
+
+
+// .content-detail {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: end;
+//     height: 100%;
+// }
 .content-detail {
+    padding-top: 4.125rem;
+}
+
+.actions {
+    position: sticky;
+    top: 5.125rem;
     display: flex;
     flex-direction: column;
-    justify-content: end;
-    height: 65%;
+    align-items: end;
+    margin-bottom: 6rem;
+    z-index: 9;
+    .singular-action {
+        --background: rgba(255, 255, 255, 0.3);
+        --border-width: 0;
+        backdrop-filter: blur(5px);
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 48px;
+        height: 48px;
+        --border-radius: 16px;
+        .icon {
+            color: #FFF;
+            min-width: 22px;
+            min-height: 22px;
+        }
+    }
 }
+
 
 .detail-movie-box {
     background-color: rgba(255, 255, 255, 0.3);
@@ -14,8 +66,16 @@
     -ms-border-radius: 16px;
     -o-border-radius: 16px;
     margin-bottom: 3rem;
+
     .description {
         margin-bottom: 2rem;
+    }
+
+    .btns {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: space-between;
     }
 }
 
@@ -24,6 +84,7 @@
     gap: 1rem;
     font-size: 0.75rem;
     margin-bottom: 2rem;
+
     .icon-star {
         margin-right: 5px;
         color: #cdff67;
@@ -40,4 +101,30 @@ ion-img {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+}
+
+h3 {
+    font-weight: 200;
+    margin-top: 0.5rem;
+}
+
+ion-title {
+    padding: 0;
+    font-weight: 200;
+    margin-top: 0.5rem;
+}
+
+
+@keyframes smoothZoom {
+    0% {
+        background-size: 110% 110%;
+    }
+
+    50% {
+        background-size: 130% 130%;
+    }
+
+    100% {
+        background-size: 110% 110%;
+    }
 }

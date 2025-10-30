@@ -1,3 +1,47 @@
-<ion-content [fullscreen]="true" class="ion-padding">
-  <h1>Search</h1>
+<ion-content [fullscreen]="true">
+  <div class="search-and-categories">
+    <div class="ion-padding-horizontal search-content">
+      <ion-searchbar animated="true" placeholder="Search"></ion-searchbar>
+    </div>
+    <div class="ion-padding-start">
+      <ion-segment [scrollable]="true" value="Action">
+        <ion-segment-button value="Action">
+          Accción
+        </ion-segment-button>
+        <ion-segment-button value="Sci-Fi">
+          Sci-Fi
+        </ion-segment-button>
+        <ion-segment-button value="Drama">
+          Drama
+        </ion-segment-button>
+        <ion-segment-button value="Comedia">
+          Comedia
+        </ion-segment-button>
+        <ion-segment-button value="Superheroes">
+          Superheroes
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </div>
+  <div class="movies ion-padding-horizontal">
+    <h1>Sci-Fi</h1>
+    <ion-grid>
+      <ion-row>
+        @for (pelicula of peliculas; track pelicula.id) {
+          <ion-col size="6" class="ion-margin-bottom">
+              <div class="movie">
+                <div [routerLink]="['/movie-detail', pelicula.id]">
+                  <ion-img [src]=pelicula.imagen></ion-img>
+                  <div class="data-movie-content">
+                    <div class="data-movie ion-no-margin"><ion-icon name="star" class="icon-star"></ion-icon>{{pelicula.calificacion}}</div>
+                    <ion-title>{{pelicula.nombre}}</ion-title>
+                    <div class="data-movie ion-no-margin">{{pelicula.year}}</div>
+                  </div>
+                </div>
+              </div>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

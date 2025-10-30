@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonIcon, IonTabBar, IonTabButton, IonTabs } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { homeOutline, searchOutline, playCircleOutline } from 'ionicons/icons';
+import { homeOutline, searchOutline, heartOutline, playCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tabs-footer',
@@ -12,7 +12,7 @@ import { homeOutline, searchOutline, playCircleOutline } from 'ionicons/icons';
 export class TabsFooterComponent  implements OnInit {
 
   constructor() { 
-    addIcons({ homeOutline, searchOutline, playCircleOutline });
+    addIcons({ homeOutline, searchOutline, heartOutline, playCircleOutline });
   }
 
   ngOnInit() {}

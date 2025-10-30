@@ -1,0 +1,28 @@
+<ion-content [fullscreen]="true" class="ion-padding-horizontal safe-area-content">
+  <h1>Favorites</h1>
+  <ion-grid>
+    <ion-row>
+      @for (pelicula of peliculas; track pelicula.id) {
+      <ion-col size="6" class="ion-margin-bottom">
+        <ion-item-sliding>
+          <ion-item class="movie">
+            <div [routerLink]="['/movie-detail', pelicula.id]">
+              <ion-img [src]=pelicula.imagen></ion-img>
+              <ion-title>{{pelicula.nombre}}</ion-title>
+            </div>
+            <div class="heart-icon-content">
+              <ion-icon name="heart" class="heart-icon"></ion-icon>
+            </div>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option (click)="presentActionSheet()">
+              <ion-icon name="trash-outline"></ion-icon>
+              Delete
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

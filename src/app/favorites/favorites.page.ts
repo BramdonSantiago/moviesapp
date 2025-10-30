@@ -1,27 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { IonContent, IonHeader, IonToolbar, IonBackButton, IonButtons, IonButton, IonIcon, IonImg, IonTitle } from '@ionic/angular/standalone';
+import { IonContent, IonImg, IonIcon, IonTitle, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem, ActionSheetController } from '@ionic/angular/standalone';
+import { heartOutline, heart, trashOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { star, shareSocialOutline, heartOutline } from 'ionicons/icons';
-import { Share } from '@capacitor/share';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { register } from 'swiper/element/bundle';
-register();
 
 @Component({
-  selector: 'app-movie-detail',
-  templateUrl: './movie-detail.page.html',
-  styleUrls: ['./movie-detail.page.scss'],
+  selector: 'app-favorites',
+  templateUrl: './favorites.page.html',
+  styleUrls: ['./favorites.page.scss'],
   standalone: true,
-  imports: [RouterModule, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, IonBackButton, IonButtons, IonButton, IonIcon, IonImg, IonTitle],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [IonContent, IonImg, IonIcon, IonTitle, CommonModule, FormsModule, RouterModule, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem],
 })
-export class MovieDetailPage implements OnInit {
-  idPage: any;
-  pelicula: any;
+export class FavoritesPage implements OnInit {
+  actionSheetCtrl = inject(ActionSheetController);
+
+  isActionSheetOpen = false;
 
   peliculas = [
     {
@@ -116,22 +111,38 @@ export class MovieDetailPage implements OnInit {
     }
   ];
 
-
-  constructor(private route: ActivatedRoute) {
-    addIcons({ star, shareSocialOutline, heartOutline });
+  constructor() {
+    addIcons({ heartOutline, heart, trashOutline });
   }
+
 
   ngOnInit() {
-    this.idPage = Number(this.route.snapshot.paramMap.get('id'));
-    this.pelicula = this.peliculas.find(pelicula => pelicula.id === this.idPage);
   }
 
-  async share(pelicula: any) {
-    await Share.share({
-      title: pelicula.nombre,
-      text: `Mira esta película: ${pelicula.nombre}\n${pelicula.descripcion}`,
-      dialogTitle: 'Compartir con amigos',
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Are you sure?',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          data: {
+            action: 'delete',
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          data: {
+            action: 'cancel',
+          },
+        },
+      ],
     });
+
+    await actionSheet.present();
   }
 
 }

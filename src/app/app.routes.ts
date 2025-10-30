@@ -56,10 +56,15 @@ export const routes: Routes = [
     children: [
       { path: 'home', loadComponent: () => import('./home/home.page').then(m => m.HomePage) },
       { path: 'search', loadComponent: () => import('./search/search.page').then(m => m.SearchPage) },
+      { path: 'favorites', loadComponent: () => import('./favorites/favorites.page').then(m => m.FavoritesPage) },
       { path: 'watchlist', loadComponent: () => import('./watchlist/watchlist.page').then(m => m.WatchlistPage) },
       { path: '', redirectTo: '/tabs-footer/home', pathMatch: 'full' },
     ],
   },
   { path: 'movie-detail/:id', loadComponent: () => import('./movie-detail/movie-detail.page').then(m => m.MovieDetailPage) },
   { path: '', redirectTo: '/tabs-footer/home', pathMatch: 'full' },
+  {
+    path: 'favorites',
+    loadComponent: () => import('./favorites/favorites.page').then( m => m.FavoritesPage)
+  },
 ];
