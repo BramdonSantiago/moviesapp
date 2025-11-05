@@ -13,7 +13,7 @@ ion-content {
     position: absolute;
     top: 0;
     background-position: top center;
-    background-size: 110% 110%;
+    background-size: 130% 110%;
     background-repeat: no-repeat;
     animation: smoothZoom 60s ease-out infinite;
     -webkit-animation: smoothZoom 60s ease-out infinite;
@@ -41,6 +41,7 @@ ion-content {
     .singular-action {
         --background: rgba(255, 255, 255, 0.3);
         --border-width: 0;
+        --box-shadow: none;
         backdrop-filter: blur(5px);
         display: inline-flex;
         justify-content: center;
@@ -117,14 +118,14 @@ ion-title {
 
 @keyframes smoothZoom {
     0% {
-        background-size: 110% 110%;
+        background-size: 130% 110%;
     }
 
     50% {
-        background-size: 130% 130%;
+        background-size: 150% 130%;
     }
 
     100% {
-        background-size: 110% 110%;
+        background-size: 130% 110%;
     }
 }

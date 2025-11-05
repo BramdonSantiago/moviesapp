@@ -1,47 +1,61 @@
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="search-and-categories">
     <div class="ion-padding-horizontal search-content">
-      <ion-searchbar animated="true" placeholder="Search"></ion-searchbar>
+      <ion-searchbar [debounce]="1000" (ionInput)="search($event)" animated="true" placeholder="Search"></ion-searchbar>
     </div>
     <div class="ion-padding-start">
-      <ion-segment [scrollable]="true" value="Action">
-        <ion-segment-button value="Action">
-          Accción
-        </ion-segment-button>
-        <ion-segment-button value="Sci-Fi">
-          Sci-Fi
-        </ion-segment-button>
-        <ion-segment-button value="Drama">
-          Drama
-        </ion-segment-button>
-        <ion-segment-button value="Comedia">
-          Comedia
-        </ion-segment-button>
-        <ion-segment-button value="Superheroes">
-          Superheroes
-        </ion-segment-button>
-      </ion-segment>
+      @if (selectedCategory()) {
+        <ion-segment [scrollable]="true" [value]="selectedCategory().id">
+          @for (category of categories(); track category.id) {
+          <ion-segment-button (click)="changeCategory($event)" [value]="category.id">
+            {{category.name}}
+          </ion-segment-button>
+          }
+        </ion-segment>
+      }
     </div>
   </div>
   <div class="movies ion-padding-horizontal">
-    <h1>Sci-Fi</h1>
+    <h1>
+      @if (queryMovie) {
+      {{queryMovie}}
+      } @else if (selectedCategory()) {
+      {{selectedCategory().name}}
+      }
+    </h1>
     <ion-grid>
       <ion-row>
-        @for (pelicula of peliculas; track pelicula.id) {
-          <ion-col size="6" class="ion-margin-bottom">
-              <div class="movie">
-                <div [routerLink]="['/movie-detail', pelicula.id]">
-                  <ion-img [src]=pelicula.imagen></ion-img>
-                  <div class="data-movie-content">
-                    <div class="data-movie ion-no-margin"><ion-icon name="star" class="icon-star"></ion-icon>{{pelicula.calificacion}}</div>
-                    <ion-title>{{pelicula.nombre}}</ion-title>
-                    <div class="data-movie ion-no-margin">{{pelicula.year}}</div>
-                  </div>
-                </div>
+        @if (moviesSearch().length > 0) {
+        @for (movie of moviesSearch(); track movie.id) {
+        <ion-col size="6" class="ion-margin-bottom">
+          <div class="movie">
+            <div [routerLink]="['/movie-detail', movie.id]">
+              <ion-img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"></ion-img>
+              <div class="data-movie-content">
+                <div class="data-movie ion-no-margin"><ion-icon name="star"
+                    class="icon-star"></ion-icon>{{(movie.vote_average / 10) * 5 | number:'1.1-1'}}</div>
+                <ion-title>{{movie.title}}</ion-title>
+                <div class="data-movie ion-no-margin">{{movie.release_date | date:'yyyy'}}</div>
               </div>
-          </ion-col>
+            </div>
+          </div>
+        </ion-col>
+        }
+        } @else {
+        <div class="ion-margin-top">
+          <ion-title>No movies</ion-title>
+        </div>
         }
       </ion-row>
+      @if (!queryMovie) {
+        <ion-infinite-scroll (ionInfinite)="loadMoreMovies($event)">
+          <ion-infinite-scroll-content loadingText="Please wait..."
+            loadingSpinner="bubbles"></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      }
     </ion-grid>
   </div>
 </ion-content>

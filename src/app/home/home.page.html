@@ -1,41 +1,95 @@
 <ion-content [fullscreen]="true" class="ion-padding-start safe-area-content">
-  <div class="section-home">
-    <h2>Estrenos</h2>
-    <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
-      @for (pelicula of peliculas; track pelicula.id) {
-      <swiper-slide>
-        <div [routerLink]="['/movie-detail', pelicula.id]">
-          <ion-img [src]=pelicula.imagen></ion-img>
-          <ion-title>{{pelicula.nombre}}</ion-title>
-        </div>
-      </swiper-slide>
-      }
-    </swiper-container>
-  </div>
-  <div class="section-home">
-    <h2>Cartelera</h2>
-    <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
-      @for (pelicula of peliculas; track pelicula.id) {
-      <swiper-slide>
-        <div [routerLink]="['/movie-detail', pelicula.id]">
-          <ion-img [src]="pelicula.imagen"></ion-img>
-          <ion-title>{{pelicula.nombre}}</ion-title>
-        </div>
-      </swiper-slide>
-      }
-    </swiper-container>
-  </div>
-  <div class="section-home">
-    <h2>Populares</h2>
-    <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
-      @for (pelicula of peliculas; track pelicula.id) {
-      <swiper-slide>
-        <div [routerLink]="['/movie-detail', pelicula.id]">
-          <ion-img [src]="pelicula.imagen"></ion-img>
-          <ion-title>{{pelicula.nombre}}</ion-title>
-        </div>
-      </swiper-slide>
-      }
-    </swiper-container>
-  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  @if(moviesTrendingToday()) {
+    <div class="section-home">
+      <h2>En tendencia <span>HOY</span></h2>
+      <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+          @for (movie of moviesTrendingToday(); track movie.id) {
+            <swiper-slide>
+              <div [routerLink]="['/movie-detail', movie.id]">
+                <ion-img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"></ion-img>
+                <ion-title>{{movie.title}}</ion-title>
+              </div>
+            </swiper-slide>
+          }
+      </swiper-container>
+    </div>
+  }
+  @if(moviesTrendingWeek()) {
+    <div class="section-home">
+      <h2>Tendencia de la <span>semana</span></h2>
+      <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+        @for (movie of moviesTrendingWeek(); track movie.id) {
+        <swiper-slide>
+          <div [routerLink]="['/movie-detail', movie.id]">
+            <ion-img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"></ion-img>
+            <ion-title>{{movie.title}}</ion-title>
+          </div>
+        </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  }
+  @if(moviesOnCinemas()) {
+    <div class="section-home">
+      <h2>En <span>cines</span></h2>
+      <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+        @for (movie of moviesOnCinemas(); track movie.id) {
+        <swiper-slide>
+          <div [routerLink]="['/movie-detail', movie.id]">
+            <ion-img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"></ion-img>
+            <ion-title>{{movie.title}}</ion-title>
+          </div>
+        </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  }
+  @if(moviesPopular()) {
+    <div class="section-home">
+      <h2>Las más <span>populares</span></h2>
+      <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+        @for (movie of moviesPopular(); track movie.id) {
+        <swiper-slide>
+          <div [routerLink]="['/movie-detail', movie.id]">
+            <ion-img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"></ion-img>
+            <ion-title>{{movie.title}}</ion-title>
+          </div>
+        </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  }
+  @if(moviesTopRated()) {
+    <div class="section-home">
+      <h2>Mejor <span>puntuadas</span></h2>
+      <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+        @for (movie of moviesTopRated(); track movie.id) {
+          <swiper-slide>
+            <div [routerLink]="['/movie-detail', movie.id]">
+              <ion-img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"></ion-img>
+              <ion-title>{{movie.title}}</ion-title>
+            </div>
+          </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  }
+  @if (moviesUpcomingFiltered()) {
+    <div class="section-home">
+      <h2>Por <span>estrenarse</span></h2>
+      <swiper-container [slidesPerView]="2.3" [spaceBetween]="20">
+        @for (movie of moviesUpcomingFiltered(); track movie.id) {
+          <swiper-slide>
+            <div [routerLink]="['/movie-detail', movie.id]">
+              <ion-img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"></ion-img>
+              <ion-title>{{movie.title}}</ion-title>
+            </div>
+          </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  }
 </ion-content>
