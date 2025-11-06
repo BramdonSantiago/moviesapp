@@ -42,7 +42,14 @@
         <p class="description">{{movie().overview}}</p>
         <div class="btns">
           <ion-button expand="full" shape="round" color="light">Add watchList</ion-button>
-          <ion-button expand="full" fill="outline" shape="round" color="light">Trailer</ion-button>
+          @if (trailers()[0]) {
+            <ion-button (click)="openSite(trailers()[0].key)" expand="full" fill="outline" shape="round" color="light">Trailer</ion-button>
+          }
+          <!-- @for (trailer of trailers(); track trailer.id) {
+            @if (trailer()[0]) {
+              <ion-button expand="full" fill="outline" shape="round" color="light">Trailer</ion-button>
+            }
+          } -->
         </div>
       </div>
     </div>

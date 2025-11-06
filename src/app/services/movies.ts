@@ -18,6 +18,7 @@ export class Movies {
   moviesUpcoming = signal<any[]>([]);
   moviesRelated = signal<any[]>([]);
   detailMovie = signal<any>(null);
+  detailMovieVideo = signal<any>([]);
   currentPage = signal(1);
   totalPages = signal(1);
   headers = new HttpHeaders(environment.headers);
@@ -76,11 +77,21 @@ export class Movies {
 
   movieDetail(id: number) {
     const endPoint = `/movie/${id}`;
+    const endpointVideo = `/movie/${id}/videos`;
 
     this.http.get(`${environment.apiUrl}${endPoint}`, { headers: this.headers }).subscribe({
       next: (response: any) => {
         this.detailMovie.set(response);
-        console.log(this.detailMovie());
+        // console.log(this.detailMovie());
+      },
+      error: (error) => {
+        console.error('Error al obtener detalle pelicula:', error);
+      }
+    });
+    this.http.get(`${environment.apiUrl}${endpointVideo}`, { headers: this.headers }).subscribe({
+      next: (response: any) => {
+        this.detailMovieVideo.set(response.results);
+        // console.log(this.detailMovieVideo());
       },
       error: (error) => {
         console.error('Error al obtener detalle pelicula:', error);

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,6 +7,7 @@ import { IonContent, IonHeader, IonToolbar, IonBackButton, IonButtons, IonButton
 import { addIcons } from 'ionicons';
 import { star, shareSocialOutline, heartOutline } from 'ionicons/icons';
 import { Share } from '@capacitor/share';
+import { Browser } from '@capacitor/browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 register();
@@ -26,6 +27,7 @@ export class MovieDetailPage implements OnInit {
   moviesService = inject(Movies);
   idPage: any;
   movie = this.moviesService.detailMovie;
+  movieTrailer = this.moviesService.detailMovieVideo;
   moviesRelated = this.moviesService.moviesRelated;
 
   constructor(private route: ActivatedRoute) {
@@ -40,7 +42,12 @@ export class MovieDetailPage implements OnInit {
   movieDetail(idPage: any) {
     this.moviesService.movieDetail(idPage);
     this.moviesService.getMoviesRelated(idPage);
+    console.log(this.trailers());
   }
+
+  trailers = computed(() => 
+    this.movieTrailer().filter((video: any) => video.type === 'Trailer')
+  );
 
   async share(movie: any) {
     await Share.share({
@@ -49,5 +56,9 @@ export class MovieDetailPage implements OnInit {
       dialogTitle: 'Share with friends',
     });
   }
+
+  openSite = async (videoKey: string) => {
+    await Browser.open({ url: `https://www.youtube.com/watch?v=${videoKey}` });
+  };
 
 }
