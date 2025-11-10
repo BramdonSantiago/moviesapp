@@ -2,24 +2,25 @@
   <h1>Watchlist</h1>
   <ion-grid>
     <ion-row>
-      @for (pelicula of peliculas; track pelicula.id) {
-        <ion-col size="6" class="ion-margin-bottom">
-          <ion-item-sliding>
-            <ion-item [routerLink]="['/movie-detail', pelicula.id]">
-              <div>
-                <ion-img [src]=pelicula.imagen></ion-img>
-                <ion-title>{{pelicula.nombre}}</ion-title>
-                <div class="movie-duration"><ion-icon name="time" class="icon-time"></ion-icon><span>{{pelicula.duracion}} min</span></div>
+      @if (watchlist().length > 0) {
+        @for (movie of watchlist(); track movie.id) {
+          <ion-col size="6" class="ion-margin-bottom">
+            <div class="movie">
+              <div [routerLink]="['/movie-detail', movie.id]">
+                <ion-img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+                  alt="{{ movie.title }}"></ion-img>
+                <ion-title>{{movie.title}}</ion-title>
               </div>
-            </ion-item>
-            <ion-item-options>
-              <ion-item-option (click)="presentActionSheet()">
-                <ion-icon name="trash-outline"></ion-icon>
-                Delete
-              </ion-item-option>
-            </ion-item-options>
-          </ion-item-sliding>
-        </ion-col>
+              <div (click)="presentActionSheet(movie)" class="trash-icon-content">
+                <ion-icon name="trash-outline" class="trash-icon"></ion-icon>
+              </div>
+            </div>
+          </ion-col>
+        }
+      } @else {
+        <div class="ion-margin-top">
+          <ion-title>No watchlist</ion-title>
+        </div>
       }
     </ion-row>
   </ion-grid>

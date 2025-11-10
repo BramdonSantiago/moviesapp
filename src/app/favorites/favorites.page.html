@@ -3,42 +3,25 @@
   <ion-grid>
     <ion-row>
       @if (favorites().length > 0) {
-      @for (favorite of favorites(); track favorite.id) {
-      <ion-col size="6" class="ion-margin-bottom">
-        <div class="movie">
-          <div [routerLink]="['/movie-detail', favorite.id]">
-            <ion-img [src]="'https://image.tmdb.org/t/p/w500' + favorite.poster_path"
-              alt="{{ favorite.title }}"></ion-img>
-            <ion-title>{{favorite.title}}</ion-title>
-          </div>
-          <div (click)="presentActionSheet(favorite)" class="heart-icon-content">
-            <ion-icon name="heart" class="heart-icon"></ion-icon>
-          </div>
-        </div>
-        <!-- <ion-item-sliding>
-            <ion-item class="movie">
+        @for (favorite of favorites(); track favorite.id) {
+          <ion-col size="6" class="ion-margin-bottom">
+            <div class="movie">
               <div [routerLink]="['/movie-detail', favorite.id]">
-                <ion-img [src]="'https://image.tmdb.org/t/p/w500' + favorite.poster_path" alt="{{ favorite.title }}"></ion-img>
+                <ion-img [src]="'https://image.tmdb.org/t/p/w500' + favorite.poster_path"
+                  alt="{{ favorite.title }}"></ion-img>
                 <ion-title>{{favorite.title}}</ion-title>
               </div>
-              <div class="heart-icon-content">
+              <div (click)="presentActionSheet(favorite)" class="heart-icon-content">
                 <ion-icon name="heart" class="heart-icon"></ion-icon>
               </div>
-            </ion-item>
-            <ion-item-options>
-              <ion-item-option (click)="presentActionSheet(favorite)">
-                <ion-icon name="trash-outline"></ion-icon>
-                Delete
-              </ion-item-option>
-            </ion-item-options>
-          </ion-item-sliding> -->
-      </ion-col>
-      }
+            </div>
+          </ion-col>
+        }
       } @else {
-      <div class="ion-margin-top">
-        <ion-title>No favorites</ion-title>
-      </div>
-      }
+          <div class="ion-margin-top">
+            <ion-title>No favorites</ion-title>
+          </div>
+        }
 
     </ion-row>
   </ion-grid>

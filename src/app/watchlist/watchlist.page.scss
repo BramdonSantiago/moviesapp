@@ -1,3 +1,33 @@
+.movie {
+    .trash-icon-content {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        -webkit-border-radius: 16px;
+        -moz-border-radius: 16px;
+        -ms-border-radius: 16px;
+        -o-border-radius: 16px;
+        // border-radius: 50%;
+        // -webkit-border-radius: 50%;
+        // -moz-border-radius: 50%;
+        // -ms-border-radius: 50%;
+        // -o-border-radius: 50%;
+        .trash-icon {
+            width: 22px;
+            height: 22px;
+            color: #FFF;
+        }
+    }
+}
+
 .movie-duration {
     display: flex;
     align-items: center;
@@ -46,9 +76,9 @@ ion-img {
 }
 
 ion-title {
+    margin-top: 0.5rem;
     padding: 0;
     font-weight: 200;
-    margin-top: 0.5rem;
 }
 
 .movie-duration {

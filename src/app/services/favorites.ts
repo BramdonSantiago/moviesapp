@@ -17,7 +17,7 @@ export class Favorites {
     this._storage = await this.storage.create();
     const favs = await this._storage.get('favorites') || [];
     this.favorites.set(favs);
-    console.log(this.favorites());
+    // console.log(this.favorites());
   }
 
   async getFavorites() {

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { IonContent, IonHeader, IonToolbar, IonBackButton, IonButtons, IonButton, IonIcon, IonImg, IonTitle } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { star, shareSocialOutline, heartOutline, heart } from 'ionicons/icons';
+import { star, shareSocialOutline, heartOutline, heart, checkmarkDoneOutline } from 'ionicons/icons';
 import { Share } from '@capacitor/share';
 import { Browser } from '@capacitor/browser';
 import { Storage } from '@ionic/storage-angular';
@@ -15,6 +15,7 @@ register();
 
 import { Movies } from '../services/movies';
 import { Favorites } from '../services/favorites';
+import { Watchlist } from '../services/watchlist';
 
 @Component({
   selector: 'app-movie-detail',
@@ -28,16 +29,18 @@ export class MovieDetailPage implements OnInit {
   currentYear = new Date().getFullYear().toString();
   moviesService = inject(Movies);
   favoritesService = inject(Favorites);
+  watchlistService = inject(Watchlist);
   // storage = this.favoritesService.getFavorites;
   favorites = [];
   isFavorite = signal(false);
+  isWatchlist = signal(false);
   idPage: any;
   movie = this.moviesService.detailMovie;
   movieTrailer = this.moviesService.detailMovieVideo;
   moviesRelated = this.moviesService.moviesRelated;
 
   constructor(private route: ActivatedRoute) {
-    addIcons({ star, shareSocialOutline, heartOutline, heart });
+    addIcons({ star, shareSocialOutline, heartOutline, heart, checkmarkDoneOutline });
   }
 
   ngOnInit() {
@@ -47,6 +50,7 @@ export class MovieDetailPage implements OnInit {
     this.idPage = Number(this.route.snapshot.paramMap.get('id'));
     this.movieDetail(this.idPage);
     this.isFavorite.set(this.favoritesService.isFavorite(this.idPage));
+    this.isWatchlist.set(this.watchlistService.iswatchList(this.idPage));
   }
 
 
@@ -74,6 +78,11 @@ export class MovieDetailPage implements OnInit {
   async toggleFavorite(movie: any) {
     await this.favoritesService.toggleFavorite(movie);
     this.isFavorite.set(this.favoritesService.isFavorite(this.idPage));
+  }
+
+  async toggleWatchList(movie: any) {
+    await this.watchlistService.toggleWatchList(movie);
+    this.isWatchlist.set(this.watchlistService.iswatchList(this.idPage));
   }
 
 }

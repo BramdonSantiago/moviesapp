@@ -45,15 +45,15 @@
         </div>
         <p class="description">{{movie().overview}}</p>
         <div class="btns">
-          <ion-button expand="full" shape="round" color="light">Add watchList</ion-button>
+          <ion-button (click)="toggleWatchList(movie())"  expand="full" shape="round" color="light">
+            @if (isWatchlist()) {
+              <ion-icon name="checkmark-done-outline" class="icon-checkmark-done"></ion-icon>
+            }
+            Add watchList
+          </ion-button>
           @if (trailers()[0]) {
             <ion-button (click)="openSite(trailers()[0].key)" expand="full" fill="outline" shape="round" color="light">Trailer</ion-button>
           }
-          <!-- @for (trailer of trailers(); track trailer.id) {
-            @if (trailer()[0]) {
-              <ion-button expand="full" fill="outline" shape="round" color="light">Trailer</ion-button>
-            }
-          } -->
         </div>
       </div>
     </div>
