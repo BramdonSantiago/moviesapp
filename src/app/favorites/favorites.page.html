@@ -12,7 +12,11 @@
                 <ion-title>{{favorite.title}}</ion-title>
               </div>
               <ion-button (click)="presentActionSheet(favorite)" class="heart-icon-content">
-                <ion-icon name="heart" class="heart-icon"></ion-icon>
+                @if (idFavorite() === favorite.id) {
+                  <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
+                } @else {
+                  <ion-icon name="heart" class="heart-icon"></ion-icon>
+                }
               </ion-button>
             </div>
           </ion-col>

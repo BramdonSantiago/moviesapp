@@ -18,8 +18,7 @@ export class FavoritesPage implements OnInit {
   favoritesService = inject(Favorites);
   favorites = this.favoritesService.favorites;
   actionSheetCtrl = inject(ActionSheetController);
-
-  isActionSheetOpen = false;
+  idFavorite = signal(0);
 
   constructor() {
     addIcons({ heartOutline, heart, trashOutline });
@@ -31,12 +30,14 @@ export class FavoritesPage implements OnInit {
 
   async ionViewWillEnter() {
     await this.favoritesService.getFavorites();
+    console.log(this.favorites());
     // await this.favoritesService.resetStorage();
   }
 
 
 
   async presentActionSheet(favorite: any) {
+    this.idFavorite.set(favorite.id);
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Are you sure?',
       mode: 'ios',
@@ -57,6 +58,9 @@ export class FavoritesPage implements OnInit {
           data: {
             action: 'cancel',
           },
+          handler: () => {
+            this.idFavorite.set(0);
+          }
         },
       ],
     });
