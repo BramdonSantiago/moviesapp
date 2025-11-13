@@ -3,7 +3,7 @@ ion-header {
 }
 
 ion-toolbar {
-    margin-top: 2rem;
+    // margin-top: 1rem;
     z-index: 1 !important;
 }
 
@@ -27,12 +27,12 @@ ion-content {
 //     height: 100%;
 // }
 .content-detail {
-    padding-top: 4.125rem;
+    padding-top: 2.125rem;
 }
 
 .actions {
     position: sticky;
-    top: 5.125rem;
+    top: 3.125rem;
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -42,7 +42,7 @@ ion-content {
         --background: rgba(255, 255, 255, 0.3);
         --border-width: 0;
         --box-shadow: none;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(2px);
         display: inline-flex;
         justify-content: center;
         align-items: center;

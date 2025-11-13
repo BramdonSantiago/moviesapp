@@ -11,9 +11,9 @@
                   alt="{{ movie.title }}"></ion-img>
                 <ion-title>{{movie.title}}</ion-title>
               </div>
-              <div (click)="presentActionSheet(movie)" class="trash-icon-content">
+              <ion-button (click)="presentActionSheet(movie)" class="trash-icon-content">
                 <ion-icon name="trash-outline" class="trash-icon"></ion-icon>
-              </div>
+              </ion-button>
             </div>
           </ion-col>
         }
