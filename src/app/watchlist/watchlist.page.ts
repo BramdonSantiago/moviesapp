@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonContent, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem, ActionSheetController } from '@ionic/angular/standalone';
-import { time, trashOutline } from 'ionicons/icons';
+import { time, trashOutline, trash } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Movies } from '../services/movies';
 import { Watchlist } from '../services/watchlist';
@@ -20,10 +20,11 @@ export class WatchlistPage implements OnInit {
   wathlistService = inject(Watchlist);
   watchlist = this.wathlistService.watchlist;
   actionSheetCtrl = inject(ActionSheetController);
+  idMovie = signal(0);
 
 
   constructor() {
-    addIcons({ time, trashOutline });
+    addIcons({ time, trashOutline, trash });
   }
 
   ngOnInit() {
@@ -35,6 +36,7 @@ export class WatchlistPage implements OnInit {
 
 
   async presentActionSheet(movie: any) {
+    this.idMovie.set(movie.id);
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Are you sure?',
       mode: 'ios',
@@ -55,6 +57,9 @@ export class WatchlistPage implements OnInit {
           data: {
             action: 'cancel',
           },
+          handler: () => {
+            this.idMovie.set(0);
+          }
         },
       ],
     });

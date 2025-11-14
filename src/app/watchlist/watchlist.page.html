@@ -12,7 +12,11 @@
                 <ion-title>{{movie.title}}</ion-title>
               </div>
               <ion-button (click)="presentActionSheet(movie)" class="trash-icon-content">
-                <ion-icon name="trash-outline" class="trash-icon"></ion-icon>
+                @if (idMovie() === movie.id) {
+                  <ion-icon name="trash" class="trash-icon"></ion-icon>
+                }@else {
+                  <ion-icon name="trash-outline" class="trash-icon"></ion-icon>
+                }
               </ion-button>
             </div>
           </ion-col>
