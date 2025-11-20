@@ -47,7 +47,8 @@ export class MovieDetailPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    this.idPage = Number(this.route.snapshot.paramMap.get('id'));
+    this.idPage = this.route.snapshot.paramMap.get('id');
+    console.log(this.idPage);
     this.movieDetail(this.idPage);
     this.isFavorite.set(this.favoritesService.isFavorite(this.idPage));
     this.isWatchlist.set(this.watchlistService.iswatchList(this.idPage));

@@ -82,7 +82,7 @@ export class Movies {
     this.http.get(`${environment.apiUrl}${endPoint}`, { headers: this.headers }).subscribe({
       next: (response: any) => {
         this.detailMovie.set(response);
-        // console.log(this.detailMovie());
+        console.log(this.detailMovie());
       },
       error: (error) => {
         console.error('Error al obtener detalle pelicula:', error);
