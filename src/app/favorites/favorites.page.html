@@ -5,26 +5,26 @@
       <ion-row>
         @if (slottedItems.length > 0) {
         @for (sl of slottedItems; track sl.slotId) {
-        <ion-col size="6" class="ion-margin-bottom">
-          <div [attr.data-swapy-slot]="sl.slotId" class="movie">
-            <div [attr.data-swapy-item]="sl.itemId">
-              <div [routerLink]="['/movie-detail', sl.item.id]">
-                <ion-img [src]="'https://image.tmdb.org/t/p/w500' + sl.item.poster_path"
-                  alt="{{ sl.item.title }}"></ion-img>
-                <ion-title>{{sl.item.title}}</ion-title>
+          <ion-col size="6" class="ion-margin-bottom">
+            <div [attr.data-swapy-slot]="sl.slotId" class="movie">
+              <div [attr.data-swapy-item]="sl.itemId">
+                <div [routerLink]="['/movie-detail', sl.item.id]">
+                  <ion-img [src]="'https://image.tmdb.org/t/p/w500' + sl.item.poster_path"
+                    alt="{{ sl.item.title }}"></ion-img>
+                  <ion-title>{{sl.item.title}}</ion-title>
+                </div>
+                <ion-button (click)="presentActionSheet(sl)" class="heart-icon-content">
+                  @if (idFavorite() === sl.item.id) {
+                    <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
+                  } @else {
+                    <ion-icon name="heart" class="heart-icon"></ion-icon>
+                  }
+                </ion-button>
+                <ion-icon name="reorder-three-outline" class="handle" data-swapy-handle></ion-icon>
               </div>
-              <ion-button (click)="presentActionSheet(sl)" class="heart-icon-content">
-                @if (idFavorite() === sl.item.id) {
-                  <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
-                } @else {
-                  <ion-icon name="heart" class="heart-icon"></ion-icon>
-                }
-              </ion-button>
-              <ion-icon name="reorder-three-outline" class="handle" data-swapy-handle></ion-icon>
             </div>
-          </div>
-        </ion-col>
-      }
+          </ion-col>
+        }
   } @else {
     <div class="ion-margin-top">
       <ion-title>No favorites</ion-title>

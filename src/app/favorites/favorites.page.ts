@@ -24,21 +24,6 @@ export class FavoritesPage implements OnInit {
   @ViewChild('swapyContainer', { static: false })
   swapyContainer!: ElementRef;
 
-  // favorites = [
-  //   {
-  //     id: '1',
-  //     title: "Facebook",
-  //   },
-  //   {
-  //     id: '2',
-  //     title: "Twitter",
-  //   },
-  //   {
-  //     id: '3',
-  //     title: "Youtube",
-  //   },
-  // ]
-
   slotItemMap: { slot: string; item: string }[] = [];
   slottedItems: { slotId: string; itemId: string; item: any }[] = [];
 

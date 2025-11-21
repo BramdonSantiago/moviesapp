@@ -75,3 +75,28 @@ ion-title {
 .movie-duration {
     color: #999;
 }
+
+
+.movie {
+    &[data-swapy-highlighted] {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        -webkit-border-radius: 16px;
+        -moz-border-radius: 16px;
+        -ms-border-radius: 16px;
+        -o-border-radius: 16px;
+    }
+    .movie-content-top {
+        &[data-swapy-dragging] {
+            opacity: 0.5;
+        }
+    }
+    .handle {
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        top: 18px;
+        left: 10px;
+        color: rgba(255, 255, 255, 0.5);
+    }
+}

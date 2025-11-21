@@ -56,7 +56,7 @@ export class Favorites {
     this.favorites.set(updated);
   }
 
-  isFavorite(id: any) {
+  isFavorite(id: any): boolean {
     const idMovie = String(id);
     return this.favorites().some(movie => movie.id === idMovie);
   }

@@ -1,12 +1,13 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonContent, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem, ActionSheetController } from '@ionic/angular/standalone';
-import { time, trashOutline, trash } from 'ionicons/icons';
+import { time, trashOutline, trash, readerOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Movies } from '../services/movies';
 import { Watchlist } from '../services/watchlist';
+import { createSwapy, utils, Swapy } from 'swapy';
 
 @Component({
   selector: 'app-watchlist',
@@ -16,22 +17,84 @@ import { Watchlist } from '../services/watchlist';
   imports: [IonContent, CommonModule, FormsModule, RouterModule, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem]
 })
 export class WatchlistPage implements OnInit {
-  moviesService = inject(Movies);
-  wathlistService = inject(Watchlist);
-  watchlist = this.wathlistService.watchlist;
+  watchlistService = inject(Watchlist);
+  watchlist = this.watchlistService.watchlist;
   actionSheetCtrl = inject(ActionSheetController);
   idMovie = signal(0);
 
+  @ViewChild('swapyContainer', { static: false })
+  swapyContainer!: ElementRef;
+
+  slotItemMap: { slot: string; item: string }[] = [];
+  slottedItems: { slotId: string; itemId: string; item: any }[] = [];
+
+  swapyInstance: any;
+
 
   constructor() {
-    addIcons({ time, trashOutline, trash });
+    addIcons({ time, trashOutline, trash, readerOutline });
   }
 
   ngOnInit() {
   }
 
   async ionViewWillEnter() {
-    await this.wathlistService.getWatchList();
+    await this.watchlistService.getWatchList();
+    // await this.watchlistService.resetStorage();
+
+    // Inicio de swipy
+    this.slotItemMap = utils.initSlotItemMap(this.watchlist(), 'id');
+    this.updateSlottedItems();
+
+    if (this.watchlist().length > 0) {
+      setTimeout(() => {
+        if (this.swapyInstance) {
+          this.swapyInstance.destroy?.();
+        } 
+
+        // if (!this.swapyContainer?.nativeElement) {
+        //   console.error('El contenedor no existe todavía');
+        //   return;
+        //   } else {
+        //   console.log('Existe contenedor');
+        // }
+
+        // Crea la instancia de Swapy
+        this.swapyInstance = createSwapy(this.swapyContainer.nativeElement, {
+          animation: 'spring',
+          swapMode: 'drop',
+          manualSwap: true
+        });
+
+        // Escucha el evento swap
+        this.swapyInstance.onSwap((event: any) => {
+          // event.newSlotItemMap.asArray es la nueva estructura
+          this.slotItemMap = event.newSlotItemMap.asArray;
+          this.updateSlottedItems();
+          // Debes marcar para Angular que detecte cambios si no estás en zona Angular
+        });
+      }, 1000);
+    }
+  }
+
+  async updateSlottedItems() {
+    this.slottedItems = utils.toSlottedItems(this.watchlist(), 'id', this.slotItemMap) as any;
+    await this.watchlistService._storage?.set('watchlist', this.slottedItems.map(s => s.item));
+    console.log(this.slotItemMap);
+    console.log(this.slottedItems);
+  }
+
+
+
+  updateSwapy() {
+    if (this.swapyInstance) {
+      this.swapyInstance.update();
+      // y además uso la función “dynamicSwapy” de utils para sincronizar mapa
+      utils.dynamicSwapy(this.swapyInstance, this.watchlist(), 'id', this.slotItemMap, (newMap) => {
+        this.slotItemMap = newMap;
+        this.updateSlottedItems();
+      });
+    }
   }
 
 
@@ -48,7 +111,7 @@ export class WatchlistPage implements OnInit {
             action: 'delete',
           },
           handler: () => {
-            this.togglewatchlist(movie);
+            this.toggleWatchList(movie.id);
           },
         },
         {
@@ -71,8 +134,15 @@ export class WatchlistPage implements OnInit {
   //   this.moviesService.movieDetail(idMovie);
   // }
 
-  async togglewatchlist(movie: any) {
-    await this.wathlistService.toggleWatchList(movie);
+  async toggleWatchList(id: string) {
+    this.watchlist.update(current => current.filter(u => u.id !== id));
+    await this.watchlistService._storage?.set('watchlist', this.watchlist());
+    this.updateSwapy();
   }
+
+
+  // async togglewatchlist(movie: any) {
+  //   await this.wathlistService.toggleWatchList(movie);
+  // }
 
 }
