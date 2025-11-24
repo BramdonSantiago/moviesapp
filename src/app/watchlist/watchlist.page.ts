@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonContent, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem, ActionSheetController } from '@ionic/angular/standalone';
-import { time, trashOutline, trash, readerOutline } from 'ionicons/icons';
+import { time, trashOutline, trash, reorderThreeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Movies } from '../services/movies';
 import { Watchlist } from '../services/watchlist';
@@ -32,7 +32,7 @@ export class WatchlistPage implements OnInit {
 
 
   constructor() {
-    addIcons({ time, trashOutline, trash, readerOutline });
+    addIcons({ time, trashOutline, trash, reorderThreeOutline });
   }
 
   ngOnInit() {
@@ -99,7 +99,7 @@ export class WatchlistPage implements OnInit {
 
 
   async presentActionSheet(movie: any) {
-    this.idMovie.set(movie.id);
+    this.idMovie.set(movie.item.id);
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Are you sure?',
       mode: 'ios',
@@ -111,7 +111,7 @@ export class WatchlistPage implements OnInit {
             action: 'delete',
           },
           handler: () => {
-            this.toggleWatchList(movie.id);
+            this.toggleWatchList(movie.item.id);
           },
         },
         {
