@@ -63,7 +63,8 @@ export class WatchlistPage implements OnInit {
         this.swapyInstance = createSwapy(this.swapyContainer.nativeElement, {
           animation: 'spring',
           swapMode: 'drop',
-          manualSwap: true
+          manualSwap: true,
+          autoScrollOnDrag: true
         });
 
         // Escucha el evento swap
