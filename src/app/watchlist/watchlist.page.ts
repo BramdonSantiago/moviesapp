@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal, ElementRef, ViewChild } from '@angul
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { IonContent, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem, ActionSheetController } from '@ionic/angular/standalone';
+import { IonContent, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow, ActionSheetController } from '@ionic/angular/standalone';
 import { time, trashOutline, trash, reorderThreeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Movies } from '../services/movies';
@@ -14,7 +14,7 @@ import { createSwapy, utils, Swapy } from 'swapy';
   templateUrl: './watchlist.page.html',
   styleUrls: ['./watchlist.page.scss'],
   standalone: true,
-  imports: [IonContent, CommonModule, FormsModule, RouterModule, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem]
+  imports: [IonContent, CommonModule, FormsModule, RouterModule, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow]
 })
 export class WatchlistPage implements OnInit {
   watchlistService = inject(Watchlist);

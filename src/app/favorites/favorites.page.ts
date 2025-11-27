@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal, ElementRef, ViewChild, effect } from
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { IonContent, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem, ActionSheetController } from '@ionic/angular/standalone';
+import { IonContent, IonImg, IonIcon, IonTitle, IonButton, IonCol, IonGrid, IonRow, ActionSheetController } from '@ionic/angular/standalone';
 import { heartOutline, heart, trashOutline, reorderThreeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Favorites } from '../services/favorites';
@@ -13,7 +13,7 @@ import { createSwapy, utils, Swapy } from 'swapy';
   templateUrl: './favorites.page.html',
   styleUrls: ['./favorites.page.scss'],
   standalone: true,
-  imports: [IonContent, IonImg, IonIcon, IonTitle, IonButton, CommonModule, FormsModule, RouterModule, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, IonItem],
+  imports: [IonContent, IonImg, IonIcon, IonTitle, IonButton, CommonModule, FormsModule, RouterModule, IonCol, IonGrid, IonRow],
 })
 export class FavoritesPage implements OnInit {
   favoritesService = inject(Favorites);
